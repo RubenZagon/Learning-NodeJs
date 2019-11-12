@@ -1,18 +1,14 @@
 /**
  * Cuenta palabras
  */
-const phrase = process.argv[2];
+const phrase = process.argv[2].toLowerCase();
 const letter = "a";
 
-const countWords = (phrase) => {
-    return phrase.split(" ").length;
-}
+const findALetter = (phrase, letter) => {
 
-const findA = (phrase, letter) => {
+    letterCount = 0;
 
-    letterCount = 0
-
-    for (var position = 0; position < phrase.length; position++) {
+    for (let position = 0; position < phrase.length; position++) {
         if (phrase.charAt(position) === letter) {
             letterCount += 1;
         }
@@ -20,6 +16,4 @@ const findA = (phrase, letter) => {
     return letterCount;
 }
 
-
-console.log(`El número de palabras: ${countWords(phrase)}`);
-console.log(`"a" encontradas: ${findA(phrase, letter)}`);
+console.log(`"a" encontradas: ${findALetter(phrase, letter)}`);
