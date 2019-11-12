@@ -1,7 +1,7 @@
-let faceNumbers = process.argv[2];
+let phrase = process.argv[2];
 
-let rollDice = (faceNumbers) => {
-    console.log(Math.ceil(Math.random() * parseInt(faceNumbers)));
+let countWords = (phrase) => {
+    return phrase.split(" ").length;
 }
 
-rollDice(faceNumbers);
+console.log(countWords(phrase));
