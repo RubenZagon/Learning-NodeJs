@@ -4,6 +4,7 @@ app.use(express.json()); //Importante para poder hacer peticiones POST
 
 
 const users = [{ id: 0, name: 'Pepe' }, { id: 1, name: 'Juan' }];
+const mandatoryField = ['name', 'username'];
 
 app.get('/users', (req, res) => {
 	res.json(users);
@@ -16,8 +17,25 @@ const getNumber = (number) => {
 }
 
 const bodyIsEmpty = (body) => {
-
 	return body.hasOwnProperty('name');
+}
+
+const hasMandatoryField = (bodyJSON) => {
+
+	if (!bodyJSON) {
+		return false;
+	}
+
+	const stringJSON = JSON.stringify(bodyJSON)
+	let validationsCount = 0;
+
+	mandatoryField.forEach(element => {
+		if (stringJSON.includes(element)) {
+			validationsCount += 1;
+		}
+	});
+
+	return validationsCount === mandatoryField.length
 }
 
 app.get('/users/:id', (req, res) => {
@@ -41,7 +59,11 @@ app.post('/users', (req, res) => {
 
 	const newUser = req.body;
 
-	console.log(bodyIsEmpty(req.body));
+	if (hasMandatoryField(newUser)) {
+		////////////////////////////////////////
+	} else {
+		///////////////////////////////////////
+	};
 
 	if (!bodyIsEmpty(req.body)) {
 		res.status(400).send('Debes pasarme algo en el Body');
