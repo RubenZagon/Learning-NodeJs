@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+app.use(express.json()); //Importante para poder hacer peticiones POST
 
 
 const users = [{ id: 0, name: 'Pepe' }, { id: 1, name: 'Juan' }];
@@ -34,8 +35,8 @@ app.get('/users/:id', (req, res) => {
 app.post('/users', (req, res) => {
 
 	const newUser = req.body;
-	newUser.id = Math.random() * 1000;
-	URLSearchParams.push(newUser);
+	newUser.id = Math.ceil(Math.random() * 1000);
+	users.push(newUser);
 	res.json(newUser);
 
 });
