@@ -1,19 +1,40 @@
 /**
- * Cuenta palabras
+ * Lee un fichero json y cuenta las palabras que encuentra
  */
-const phrase = process.argv[2].toLowerCase();
-const letter = "a";
+const fs = require('fs');
 
-const findALetter = (phrase, letter) => {
+const FILE = process.argv[2];
+const filePath = `data/${FILE}`;
 
-    letterCount = 0;
+let contenido;
 
-    for (let position = 0; position < phrase.length; position++) {
-        if (phrase.charAt(position) === letter) {
-            letterCount += 1;
-        }
+const countWords = (phrase) => {
+    return phrase.split(" ").length;
+};
+
+const readFile = (file)
+fs.readFile(filePath, (err, data) => {
+    if (err) {
+        console.error('Error', err);
+    } else {
+        const json = JSON.parse(data);
+        contenido = json;
+        console.log('Los datos del fichero son', json);
+        console.log(`Las palabras contadas han sido: ${countWords(json)}`);
     }
-    return letterCount;
-}
+});
 
-console.log(`"a" encontradas: ${findALetter(phrase, letter)}`);
+console.log(contenido);
+
+/*
+
+fs.writeFile(filePath, contenido, err => {
+    if (err) {
+        console.error('Error', err);
+    } else {
+
+        console.log('Fichero guardado correctamente');
+    }
+});
+
+*/
