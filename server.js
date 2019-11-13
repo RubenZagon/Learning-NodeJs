@@ -1,36 +1,43 @@
 const express = require('express');
 const app = express();
 
-let rollDice = (numberOfFaces) => {
-	return Math.ceil(Math.random() * parseInt(numberOfFaces));
-}
+
+const users = [{ id: 0, name: 'Pepe' }, { id: 1, name: 'Juan' }];
+
+app.get('/users', (req, res) => {
+	res.json(users);
+
+});
 
 const getNumber = (number) => {
 	const regExp = /^\d+$/;
 	return number.match(regExp);
 }
 
-app.get('/dice', (req, res) => {
-	const dice = rollDice();
-	res.json([{ ResultOfRollDice: dice }]);
+app.get('/users/:id', (req, res) => {
 
-});
+	const userId = getNumber(req.params.id);
 
-app.get('/dice/:numberOfFaces', (req, res) => {
-
-	const numbFaces = getNumber(req.params.numberOfFaces);
-
-	if (!numbFaces) {
+	if (!userId) {
 		res.json({ error: "Introduzca un número válido" });
 	}
 
-	resultOfRollDice = rollDice(numbFaces);
+	if (userId > 1 | userId < 0) {
+		res.json({ error: "Actualmente solo contamos con id 0 y 1" });
+	}
 
-	res.json([{ result: resultOfRollDice }]);
-
-
+	const user = users.find(user => user.id == userId);
+	res.json(user);
 
 });
 
+app.post('/users', (req, res) => {
+
+	const newUser = req.body;
+	newUser.id = Math.random() * 1000;
+	URLSearchParams.push(newUser);
+	res.json(newUser);
+
+});
 
 app.listen(3000, () => console.log('Ready on port 3000!'));
