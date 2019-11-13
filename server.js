@@ -51,8 +51,9 @@ app.post('/movie', (req, res) => {
 			likes: 0,
 			name: name
 		});
-		console.log('Pelicula añadida correctamente');
-		res.json(movies);
+		return res.status(200).send('Pelicula añadida correctamente');
+	} else {
+		return res.status(400).send('Titulo de película no válido');
 	}
 
 
@@ -68,9 +69,17 @@ app.post('/movie', (req, res) => {
 */
 });
 
-app.delete('/movie/:id', (req, res) => {
+app.delete('/movie', (req, res) => {
 
 
 });
+
+
+app.put('/movie', (req, res) => {
+
+	// Que actualice el nombre de la peli
+
+});
+
 
 app.listen(3000, () => console.log('Ready on port 3000!'));
