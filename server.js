@@ -1,34 +1,13 @@
 const express = require('express');
 const app = express();
 
-const users = [{ id: 0, name: 'Pepe' }, { id: 1, name: 'Juan' }];
-
-app.get('/users', (req, res) => {
-	res.json(users);
-
-});
-
-const getNumber = (number) => {
-	const regExp = /^\d+$/;
-	return number.match(regExp);
+let rollDice = () => {
+	return Math.ceil(Math.random() * 6);
 }
 
-app.get('/users/:id', (req, res) => {
-
-	const userId = getNumber(req.params.id);
-
-	if (!userId) {
-		res.json({ error: "Introduzca un número válido" });
-	}
-
-	if (userId > 1 | userId < 0) {
-		res.json({ error: "Actualmente solo contamos con id 0 y 1" });
-	}
-
-	const user = users.find(user => user.id == userId);
-	res.json(user);
-
-
+app.get('/dice', (req, res) => {
+	const dice = rollDice();
+	res.json([{ ResultOfRollDice: dice }]);
 
 });
 
