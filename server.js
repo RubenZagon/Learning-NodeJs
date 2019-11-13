@@ -1,11 +1,35 @@
-const express = require ('express');
+const express = require('express');
 const app = express();
 
-const usuarios = [{name: 'Pepe'}, {name: 'Juan'}];
+const users = [{ id: 0, name: 'Pepe' }, { id: 1, name: 'Juan' }];
 
-app.get ('/', (req,res) =>{
-	res.json(usuarios);
-	
+app.get('/users', (req, res) => {
+	res.json(users);
+
+});
+
+const getNumber = (number) => {
+	const regExp = /^\d+$/;
+	return number.match(regExp);
+}
+
+app.get('/users/:id', (req, res) => {
+
+	const userId = getNumber(req.params.id);
+
+	if (!userId) {
+		res.json({ error: "Introduzca un número válido" });
+	}
+
+	if (userId > 1 | userId < 0) {
+		res.json({ error: "Actualmente solo contamos con id 0 y 1" });
+	}
+
+	const user = users.find(user => user.id == userId);
+	res.json(user);
+
+
+
 });
 
 app.listen(3000, () => console.log('Ready on port 3000!'));
