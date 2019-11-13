@@ -15,6 +15,11 @@ const getNumber = (number) => {
 	return number.match(regExp);
 }
 
+const bodyIsEmpty = (body) => {
+
+	return body.hasOwnProperty('name');
+}
+
 app.get('/users/:id', (req, res) => {
 
 	const userId = getNumber(req.params.id);
@@ -35,10 +40,16 @@ app.get('/users/:id', (req, res) => {
 app.post('/users', (req, res) => {
 
 	const newUser = req.body;
-	newUser.id = Math.ceil(Math.random() * 1000);
-	users.push(newUser);
-	res.json(newUser);
 
+	console.log(bodyIsEmpty(req.body));
+
+	if (!bodyIsEmpty(req.body)) {
+		res.status(400).send('Debes pasarme algo en el Body');
+	} else {
+		newUser.id = Math.ceil(Math.random() * 1000);
+		users.push(newUser);
+		res.json(newUser);
+	}
 });
 
 app.listen(3000, () => console.log('Ready on port 3000!'));
