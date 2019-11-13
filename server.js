@@ -2,76 +2,75 @@ const express = require('express');
 const app = express();
 app.use(express.json()); //Importante para poder hacer peticiones POST
 
+const fs = require('fs');
+const FILEPATH = 'movies.json';
 
-const users = [{ id: 0, name: 'Pepe' }, { id: 1, name: 'Juan' }];
-const mandatoryField = ['name', 'username'];
+const mandatoryField = ['name'];
 
-app.get('/users', (req, res) => {
-	res.json(users);
+// IMPORTANTE VALIDAR SIEMPRE LA ENTRADA DE DATOS
 
-});
-
-const getNumber = (number) => {
-	const regExp = /^\d+$/;
-	return number.match(regExp);
-}
-
-const bodyIsEmpty = (body) => {
-	return body.hasOwnProperty('name');
-}
-
-const hasMandatoryField = (bodyJSON) => {
-
-	if (!bodyJSON) {
-		return false;
+let movies = [
+	{
+		"id": 0,
+		"name": "Jhon Wick"
+	},
+	{
+		"id": 1,
+		"name": "Scott Philgrim contra el mundo"
 	}
+];
 
-	const stringJSON = JSON.stringify(bodyJSON)
-	let validationsCount = 0;
 
-	mandatoryField.forEach(element => {
-		if (stringJSON.includes(element)) {
-			validationsCount += 1;
+app.get('/movie', (req, res) => {
+
+	res.json(movies);
+
+	/*
+	fs.readFile(FILEPATH, (err, data) => {
+		if (err) {
+			console.error('Error', err);
+		} else {
+			const json = JSON.parse(data);
+			jsonMovie = (JSON.parse(data));
+			console.log(jsonMovie);
+			//res.json(json);
+			res.send(jsonMovie);
 		}
 	});
-
-	return validationsCount === mandatoryField.length
-}
-
-app.get('/users/:id', (req, res) => {
-
-	const userId = getNumber(req.params.id);
-
-	if (!userId) {
-		res.json({ error: "Introduzca un número válido" });
-	}
-
-	if (userId > 1 | userId < 0) {
-		res.json({ error: "Actualmente solo contamos con id 0 y 1" });
-	}
-
-	const user = users.find(user => user.id == userId);
-	res.json(user);
+	*/
 
 });
 
-app.post('/users', (req, res) => {
+app.post('/movie', (req, res) => {
 
-	const newUser = req.body;
+	const name = req.body.name;
 
-	if (hasMandatoryField(newUser)) {
-		////////////////////////////////////////
-	} else {
-		///////////////////////////////////////
-	};
-
-	if (!bodyIsEmpty(req.body)) {
-		res.status(400).send('Debes pasarme algo en el Body');
-	} else {
-		newUser.id = Math.ceil(Math.random() * 1000);
-		users.push(newUser);
-		res.json(newUser);
+	if (name != null) {
+		movies.push({
+			id: movies[movies.length - 1].id + 1,
+			likes: 0,
+			name: name
+		});
+		console.log('Pelicula añadida correctamente');
+		res.json(movies);
 	}
+
+
+	/*
+	fs.appendFile(FILEPATH, newMovie, err => {
+		if (err) {
+			console.error('Error', err);npm
+		} else {
+			console.log('Pelicula añadida correctamente');
+			res.send('Pelicula añadida correctamente');
+		}
+	})
+*/
+});
+
+app.delete('/movie/:id', (req, res) => {
+
+
 });
 
 app.listen(3000, () => console.log('Ready on port 3000!'));
