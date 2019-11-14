@@ -11,11 +11,11 @@ function fillDB() {
 }
 
 //API REST USERS
-router.get('/getusers', (req, res) => {
+router.get('/', (req, res) => {
     res.status(200).send(db);
 });
 
-router.post('/adduser', (req, res) => {
+router.post('/', (req, res) => {
     const { name, age } = req.body;
     if (name != null && age != null) {
         db.push({ name: name, age: parseInt(age) });

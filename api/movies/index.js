@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const movies = loadMovies();
+//const movies = loadMovies();
 
 
 let movies = [
