@@ -4,9 +4,9 @@ const controller = require('./controller');
 
 
 //API REST movies
-router.get('/', (req, res) => controller.getMovies(res));
+router.get('/', (req, res) => res.status(200).json(controller.getMovies()));
 
-router.put('/', (req, res) => controller.addLike(req, res));
+router.put('/', (req, res) => res.status(200).send(controller.addLike()));
 
 router.post('/', (req, res) => controller.newMovie(req, res));
 

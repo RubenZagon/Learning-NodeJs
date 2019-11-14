@@ -10,8 +10,8 @@ let movies = [
 
 
 
-const getMovies = (res) => {
-    res.status(200).json(movies);
+const getMovies = () => {
+    return movies;
 }
 
 
@@ -20,7 +20,7 @@ const addLike = (req, res) => {
     let film = movies.find(movie => movie.ID === id);
     if (film) {
         film.likes++;
-        res.status(200).send(movies);
+        return movies;
     }
     else {
         res.status(400).send("Película no encontrada");
