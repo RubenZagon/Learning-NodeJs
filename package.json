@@ -1,5 +1,5 @@
 {
-  "name": "server-NodeJS",
+  "name": "serverNodeJS",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -8,12 +8,15 @@
     "dev": "nodemon server.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Rubén",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "express-session": "^1.17.0",
+    "morgan": "^1.9.1"
   },
   "devDependencies": {
+    "eslint": "^6.6.0",
     "nodemon": "^1.19.4"
   }
 }

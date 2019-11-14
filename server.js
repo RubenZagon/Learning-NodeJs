@@ -1,10 +1,14 @@
 const express = require("express");
+const morgan = require("morgan"); //Te da información de los HTTP
+
 const app = express();
 
 const moviesRouter = require('./api/movies');
 const usersRouter = require('./api/users');
 
 app.use(express.json());
+app.use(morgan("combined"));
+
 app.use('/movies', moviesRouter);
 app.use('/users', usersRouter);
 
