@@ -1,3 +1,5 @@
+const _ = require("lodash");
+
 const express = require('express');
 const router = express.Router();
 
@@ -24,5 +26,7 @@ router.post('/', (req, res) => {
         res.status(400).send("No se han proporcionado todos los campos necesarios");
     }
 });
+
+fillDB();
 
 module.exports = router;
