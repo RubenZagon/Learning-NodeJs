@@ -11,6 +11,12 @@ app.use(morgan("combined"));
 
 app.use('/movies', moviesRouter);
 app.use('/users', usersRouter);
+app.use((err, next) => {
+  if (err) {
+    res.status(500).send(err);
+    return;
+  }
+});
 
 //APP START
 app.listen(3000, () => console.log('Ready on port 3000!'));
