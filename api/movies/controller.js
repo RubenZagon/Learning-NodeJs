@@ -12,7 +12,7 @@ let movies = [
 
 const getMovies = () => {
     return movies;
-}
+};
 
 
 const addLike = (req, res) => {
@@ -25,23 +25,26 @@ const addLike = (req, res) => {
     else {
         res.status(400).send("Película no encontrada");
     }
-}
+};
 
-const newMovie = (req, res) => {
-    let title = req.body.title;
+const newMovie = (req) => {
+    let title = req;
     if (title != null) {
-        movies.push({
+        let newMovie = {
             ID: movies[movies.length - 1].ID + 1,
             likes: 0,
             title: title
-        })
-        res.status(200).send("Pelicula añadida correctamente");
+        };
+        movies.push(newMovie);
+        return  newMovie;
+        //res.status(200).send("Pelicula añadida correctamente");
     } else {
-        res.status(400).send("Error al añadir la película");
+        return "Error al añadir la película";
+        //res.status(400).send("Error al añadir la película");
     }
-}
+};
 
-const deletMovie = (req, res) => {
+const deleteMovie = (req, res) => {
     let id = req.body.ID;
     let film = movies.find(movie => movie.ID == id);
 
@@ -51,11 +54,11 @@ const deletMovie = (req, res) => {
     } else {
         res.status(400).send('Error al borrar la película');
     }
-}
+};
 
 module.exports = {
     getMovies,
     addLike,
     newMovie,
-    deletMovie
+    deleteMovie,
 };
