@@ -16,11 +16,11 @@ const getMovies = () => {
 
 
 const addLike = (req, res) => {
-    let id = req.body.id;
+    let id = req;
     let film = movies.find(movie => movie.ID === id);
     if (film) {
         film.likes++;
-        return movies;
+        return film;
     }
     else {
         res.status(400).send("Película no encontrada");
