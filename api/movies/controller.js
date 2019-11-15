@@ -36,7 +36,7 @@ const newMovie = (req) => {
             title: title
         };
         movies.push(newMovie);
-        return  newMovie;
+        return newMovie;
         //res.status(200).send("Pelicula añadida correctamente");
     } else {
         return "Error al añadir la película";
