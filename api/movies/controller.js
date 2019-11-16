@@ -24,11 +24,11 @@ const newMovie = (req) => {
     return newMovie;
   } else {
 
-    return;
+    return false;
   }
 };
 
-const addLike = (req, res) => {
+const addLike = (req) => {
   let id = req;
   let film = movies.find(movie => movie.ID === id);
   if (film) {
