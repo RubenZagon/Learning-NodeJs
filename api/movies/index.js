@@ -3,34 +3,10 @@ const router = express.Router();
 const controller = require('./controller');
 
 
-function getMovies(res) {
-    res.status(200).json(controller.getMovies());
-};
+const getMovies = (req, res) => { res.status(200).json(controller.getMovies());  };
 
 
-//API REST movies
-router.get('/', getMovies);
-
-router.get('/average', (req, res) => {
-  controller.getAverage();
-});
-
-router.put('/', (req, res) => res.status(200).json(controller.addLike(req.body, res)));
-
-//router.post('/', newMovie);
-
-router.delete('/', (req, res) => controller.deletMovie(req, res));
-
-const isValidMovieToCreate = (body) => body && body.title;
-
-const validaMovieTitle = (movie) => {
-  if (movie && movie.title) {
-    return true;
-  }
-  throw new Error('Invalid');
-};
-
-const isValid = input => (validators) => {
+const isValid = input => (veq, validators) => {
   try {
     return validators.every(validator => validator(input));
   } catch (e) {
@@ -38,6 +14,15 @@ const isValid = input => (validators) => {
   }
 };
 
+/*
+const validaMovieTitle = (movie) => {
+  if (movie && movie.title) {
+    return true;
+  }
+  throw new Error('Invalid');
+};
+
+const isValidMovieToCreate = (body) => body && body.title;
 
 const validateDate = input => {
   if (input && input.date && input.date.getMonth() > 3) {
@@ -46,16 +31,26 @@ const validateDate = input => {
   }
   throw new Error('Invalid date');
 };
+*/
 
-/*
 const newMovie = (req, res, next) => {
-  if (isValid(req.body)([validaMovieTitle, validateName, validateDate])) {
-    res.status(200).json(controller.newMovie(req.body.title))
+  if (isValid(req.body)) {
+    return res.status(200).json(controller.newMovie(req.body.title))
   } else {
-    next('Invalid movie');
+    return res.status(400).json(controller.newMovie(req.body.title))
+    //next('Invalid movie');
   }
 };
 
-*/
+
+//API REST movies
+router.get('/', getMovies);
+
+router.post('/', newMovie);
+
+router.put('/', (req, res) => res.status(200).json(controller.addLike(req.body, res)));
+
+router.delete('/', (req, res) => controller.deletMovie(req, res));
+
 
 module.exports = router;

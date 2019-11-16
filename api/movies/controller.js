@@ -11,17 +11,6 @@ const getMovies = () => {
   return movies;
 };
 
-const addLike = (req, res) => {
-  let id = req;
-  let film = movies.find(movie => movie.ID === id);
-  if (film) {
-    film.likes++;
-    return film;
-  } else {
-    res.status(400).send("Película no encontrada");
-  }
-};
-
 const newMovie = (req) => {
   let title = req;
   if (title != null) {
@@ -36,6 +25,17 @@ const newMovie = (req) => {
   } else {
 
     return "Error al añadir la película";
+  }
+};
+
+const addLike = (req, res) => {
+  let id = req;
+  let film = movies.find(movie => movie.ID === id);
+  if (film) {
+    film.likes++;
+    return film;
+  } else {
+    res.status(400).send("Película no encontrada");
   }
 };
 
