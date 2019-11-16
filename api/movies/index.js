@@ -2,18 +2,11 @@ const express = require('express');
 const router = express.Router();
 const controller = require('./controller');
 
-function getMovies(req, res, next) {
-  try {
-    controller.getMovies().then(movies => {
-      res.status(200).json(movies);
-    }).catch(err => {
-      next(`Error in the DB: ${err}`);
-    });
-  } catch (e) {
-    next('Movie not found');
-  }
-  // res.status(200).json(controller.getMovies());
-}
+
+function getMovies(res) {
+    res.status(200).json(controller.getMovies());
+};
+
 
 //API REST movies
 router.get('/', getMovies);
@@ -24,7 +17,7 @@ router.get('/average', (req, res) => {
 
 router.put('/', (req, res) => res.status(200).json(controller.addLike(req.body, res)));
 
-router.post('/', newMovie);
+//router.post('/', newMovie);
 
 router.delete('/', (req, res) => controller.deletMovie(req, res));
 
@@ -54,6 +47,7 @@ const validateDate = input => {
   throw new Error('Invalid date');
 };
 
+/*
 const newMovie = (req, res, next) => {
   if (isValid(req.body)([validaMovieTitle, validateName, validateDate])) {
     res.status(200).json(controller.newMovie(req.body.title))
@@ -62,5 +56,6 @@ const newMovie = (req, res, next) => {
   }
 };
 
+*/
 
 module.exports = router;
