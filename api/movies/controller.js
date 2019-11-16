@@ -24,7 +24,7 @@ const newMovie = (req) => {
     return newMovie;
   } else {
 
-    return "Error al añadir la película";
+    return;
   }
 };
 
@@ -35,19 +35,22 @@ const addLike = (req, res) => {
     film.likes++;
     return film;
   } else {
-    res.status(400).send("Película no encontrada");
+    return false;
   }
 };
 
-const deleteMovie = (req, res) => {
-  let id = req.body.ID;
-  let film = movies.find(movie => movie.ID == id);
 
-  if (film > 0) {
-    movies.splice(film, 1);
-    res.status(200).send(movies);
+const deleteMovie = (req) => {
+  let id = req;
+
+  let movieEncontred = movies.find(movie => movie.ID === id);
+
+  if (undefined != movieEncontred && movieEncontred.ID >= 0) {
+    movies.splice(movieEncontred.ID, 1);
+    return movies;
+
   } else {
-    res.status(400).send('Error al borrar la película');
+    return false;
   }
 };
 
@@ -57,3 +60,5 @@ module.exports = {
   newMovie,
   deleteMovie
 };
+
+

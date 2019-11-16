@@ -1,0 +1,373 @@
+{
+	"info": {
+		"_postman_id": "5dde3049-e25f-477e-ad95-f4b87cfbb0f1",
+		"name": "CRUD_Peliculas",
+		"description": "test para que te entregue las lista de películas en JSON, te agregue una, te de un like, y te elimine una de la lista",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Entrega las películas",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8346525f-5c27-4653-8f49-04a7b2e64da3",
+						"exec": [
+							"pm.test(\"Respuesta OK\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Encuentra un string con 'ID'\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"ID\");",
+							"});",
+							"",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/movies",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"movies"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Nueva película (Nombre válido)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "129858d1-845a-4b85-a4e5-6b66ceb720f5",
+						"exec": [
+							"pm.test(\"Respuesta OK, aceptada petición\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"",
+							"pm.test(\"Encuentra un string con 'ID'\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"ID\");",
+							"});",
+							"",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"title\": \"Rambo\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/movies",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"movies"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Nueva película (Nombre NO válido)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b4bc9510-7f01-4b43-aace-38ad8c4f308b",
+						"exec": [
+							"pm.test(\"Notifica fallo de usuario - 400\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Responde con 'Nombre inválido, no se ha podido añadir la película'\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"Nombre inválido, no se ha podido añadir la película\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/movies",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"movies"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Dar like",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2d1b653c-60bc-4e12-88aa-6ab4e130f7f9",
+						"exec": [
+							"pm.test(\"Respuesta OK, aceptada petición\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"",
+							"pm.test(\"Encuentra un string con 'ID'\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"ID\");",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"ID\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/movies",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"movies"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Dat like (Inválido)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1a5c33cf-bb0a-4c57-8062-8ed40a294b6c",
+						"exec": [
+							"pm.test(\"Notifica fallo de usuario - 400\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Responde con 'Película no encontrada'\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"Película no encontrada\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/javascript",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"ID\": 34\n}",
+					"options": {
+						"raw": {
+							"language": "javascript"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/movies",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"movies"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Borrar una película",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4ba61b67-d26f-4345-88ac-768c6c240d88",
+						"exec": [
+							"pm.test(\"Respuesta OK, aceptada petición\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"",
+							"pm.test(\"Encuentra un string con 'ID'\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"ID\");",
+							"});",
+							"",
+							"pm.test(\"No encuentra la película borrada por el 'ID'\", function () {",
+							"    pm.expect(pm.response.text()).to.not.include(\"ID:1\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"ID\":1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/movies",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"movies"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Borrar una película (Inválido ID)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9fe606df-418b-434c-b1be-3667b5ae7b66",
+						"exec": [
+							"pm.test(\"Notifica fallo de usuario\", function () {",
+							"    pm.response.to.have.status(406);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Responde con 'Película no encontrada'\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"Error al borrar la película, película no encontrada.\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"ID\":5\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/movies",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"movies"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
