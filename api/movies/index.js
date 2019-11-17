@@ -15,16 +15,6 @@ const newMovie = (req, res, next) => {
   }
 };
 
-const addLike = (req, res) => {
-  const respondOfRequest = controller.addLike(req.body.ID, res);
-if (respondOfRequest){
-  res.status(201).json(respondOfRequest);
-} else {
-  res.status(400).json('Película no encontrada');
-}
-
-};
-
 const deleteMovie = (req, res) => {
   const respondOfRequest = controller.deleteMovie(req.body.ID, res);
 
@@ -36,14 +26,40 @@ const deleteMovie = (req, res) => {
     };
 };
 
+// Ejercicio
+function respond(respondOfRequest, res) {
+  if (respondOfRequest) {
+    res.status(201).json(respondOfRequest);
+  }
+  else {
+    res.status(400).json('Película no encontrada');
+  }
+};
+
+const like = (req, res) => {
+  const respondOfRequest = controller.modifyLike(req.body.ID, true);
+  return respond(respondOfRequest, res);
+};
+
+const dislike = (req, res) => {
+  const respondOfRequest = controller.modifyLike(req.body.ID, false);
+  return respond(respondOfRequest, res);
+};
+
+
 //API REST movies
 router.get('/', getMovies);
 
 router.post('/', newMovie);
 
-router.put('/', addLike);
 
 router.delete('/', deleteMovie);
 
+/// Ejercicio
+router.put('/like', like);
+
+router.put('/dislike', dislike);
 
 module.exports = router;
+
+

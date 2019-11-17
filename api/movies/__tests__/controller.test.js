@@ -12,18 +12,29 @@ describe('Movies_Controllers',() => {
 
   test('Si contiene un título válido debe devolver la película',() =>{
     const movie = 'Rambo',
-          newMovieOK = {ID: 3, likes:0, title: 'Rambo'};
+          newMovieOK = {ID: 3, like:false, title: 'Rambo'};
 
     expect(controller.newMovie(movie)).toStrictEqual(newMovieOK);
   }),
 
-  test('Debe devolver un valor superior a 1 en Like', () =>{
-    const movie = controller.getMovies();
-    expect(controller.addLike(0)).toEqual(movie[0]);
+  test('Debe devolver que el valor de like es TRUE', () =>{
+    const getMovies = controller.getMovies();
+
+    controller.modifyLike(0, true);
+
+    expect(getMovies[0].like).toBeTruthy();
+  }),
+
+  test('Debe devolver que el valor de like es FALSE', () =>{
+    const getMovies = controller.getMovies();
+
+    controller.modifyLike(0, false);
+
+    expect(getMovies[0].like).toBeFalsy();
   }),
 
   test('Debe devolver falso si no puede darle like a la plícula porque no la encuentra', () =>{
-    expect(controller.addLike(42)).toBeFalsy();
+    expect(controller.modifyLike(42, true)).toBeFalsy();
   }),
 
   test('Debe devolver un JSON con las películas pero sin la que acabamos de borrar, que es la que añadimos con el ID:3 anteriormente', () =>{

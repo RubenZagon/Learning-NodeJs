@@ -1,9 +1,9 @@
 
 
 let movies = [
-  { ID: 0, likes: 0, title: "El misterio de los cuadros" },
-  { ID: 1, likes: 0, title: "Apocalipsis final" },
-  { ID: 2, likes: 0, title: "One bullet three deads" }
+  { ID: 0, like: false, title: "El misterio de los cuadros" },
+  { ID: 1, like: false, title: "Apocalipsis final" },
+  { ID: 2, like: false, title: "One bullet three deads" }
 ];
 
 
@@ -16,7 +16,7 @@ const newMovie = (req) => {
   if (title != null) {
     let newMovie = {
       ID: movies[movies.length - 1].ID + 1,
-      likes: 0,
+      like: false,
       title: title
     };
     movies.push(newMovie);
@@ -24,17 +24,6 @@ const newMovie = (req) => {
     return newMovie;
   } else {
 
-    return false;
-  }
-};
-
-const addLike = (req) => {
-  let id = req;
-  let film = movies.find(movie => movie.ID === id);
-  if (film) {
-    film.likes++;
-    return film;
-  } else {
     return false;
   }
 };
@@ -54,9 +43,31 @@ const deleteMovie = (req) => {
   }
 };
 
+// Ejercicio
+
+const modifyLike = (req, addOrRemove = true) => {
+  let id = req;
+  let modify = addOrRemove;
+  let film = movies.find(movie => movie.ID === id);
+  if (film) {
+    if (modify == true){
+      film.like = true;
+    } else {
+      film.like = false;
+    }
+    return film;
+
+  } else {
+    return false;
+  }
+};
+
+
+
+
 module.exports = {
   getMovies,
-  addLike,
+  modifyLike,
   newMovie,
   deleteMovie
 };
