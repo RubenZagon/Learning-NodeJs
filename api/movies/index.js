@@ -4,14 +4,14 @@ const controller = require('./controller');
 const helper = require('./helper');
 
 
+
 const getMovies = (req, res) => { res.status(200).json(controller.getMovies());  };
 
-const newMovie = (req, res, next) => {
+const newMovie = (req, res) => {
   if (req.body && req.body.title) {
     return res.status(201).json(controller.newMovie(req.body.title))
   } else {
     return res.status(400).json("Nombre inválido, no se ha podido añadir la película")
-    //next('Invalid movie');
   }
 };
 
@@ -26,7 +26,7 @@ const deleteMovie = (req, res) => {
     };
 };
 
-// Ejercicio
+
 function respond(respondOfRequest, res) {
   if (respondOfRequest) {
     res.status(201).json(respondOfRequest);
@@ -65,7 +65,6 @@ router.post('/', newMovie);
 
 router.delete('/', deleteMovie);
 
-/// Ejercicio
 router.put('/like', like);
 
 router.put('/dislike', dislike);

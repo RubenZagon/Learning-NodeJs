@@ -1,10 +1,26 @@
+const fs = require ('fs');
+const FILEPATH = 'data/movies.json';
 
 
-let movies = [
-  { ID: 0, like: false, title: "El misterio de los cuadros" },
-  { ID: 1, like: false, title: "Apocalipsis final" },
-  { ID: 2, like: false, title: "One bullet three deads" }
-];
+async function loadMovies (){
+
+  return await fs.readFile(FILEPATH, (err, data) => {
+    if (err){
+      console.log('Error', err);
+    } else {
+      return JSON.parse(data);
+    }
+  });
+};
+
+let peliculas = loadMovies()
+
+
+console.log(peliculas);
+
+//#####################################
+let movies;
+
 
 
 const getMovies = () => {
@@ -13,6 +29,7 @@ const getMovies = () => {
 
 const newMovie = (req) => {
   let title = req;
+  console.log(movies);
   if (title != null) {
     let newMovie = {
       ID: movies[movies.length - 1].ID + 1,
@@ -42,8 +59,6 @@ const deleteMovie = (req) => {
     return false;
   }
 };
-
-// Ejercicio
 
 const modifyLike = (req, addOrRemove = true) => {
   let id = req;
