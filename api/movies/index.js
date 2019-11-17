@@ -63,7 +63,6 @@ router.get('/', getMovies);
 
 router.post('/', newMovie);
 
-
 router.delete('/', deleteMovie);
 
 /// Ejercicio
