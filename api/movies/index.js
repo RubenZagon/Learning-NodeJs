@@ -46,6 +46,17 @@ const dislike = (req, res) => {
   return respond(respondOfRequest, res);
 };
 
+const getlikes = (req, res) => {
+  const movies = controller.getMovies();
+  const moviesWithLikes = movies.filter(movie => movie.like == true);
+
+  if (moviesWithLikes.length !== 0){
+    res.status(200).json(moviesWithLikes);
+  } else {
+    res.status(500).json("No se encontraron películas que te gusten.");
+  }
+};
+
 
 //API REST movies
 router.get('/', getMovies);
@@ -59,6 +70,8 @@ router.delete('/', deleteMovie);
 router.put('/like', like);
 
 router.put('/dislike', dislike);
+
+router.get('/getlikes', getlikes);
 
 module.exports = router;
 
