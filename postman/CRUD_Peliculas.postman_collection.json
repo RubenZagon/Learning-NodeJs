@@ -168,6 +168,10 @@
 							"pm.test(\"Encuentra un string con 'ID'\", function () {",
 							"    pm.expect(pm.response.text()).to.include(\"ID\");",
 							"});",
+							"",
+							"pm.test(\"Encuentra un string con 'true'\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"true\");",
+							"});",
 							""
 						],
 						"type": "text/javascript"
@@ -194,20 +198,159 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:3000/movies",
+					"raw": "localhost:3000/movies/like",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
-						"movies"
+						"movies",
+						"like"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Dat like (Inválido)",
+			"name": "Entrega las películas con likes",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8346525f-5c27-4653-8f49-04a7b2e64da3",
+						"exec": [
+							"pm.test(\"Respuesta OK\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Encuentra un string con 'ID'\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"ID\");",
+							"});",
+							"",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/movies/getlikes",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"movies",
+						"getlikes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Dar dislike",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2d1b653c-60bc-4e12-88aa-6ab4e130f7f9",
+						"exec": [
+							"pm.test(\"Respuesta OK, aceptada petición\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"",
+							"pm.test(\"Encuentra un string con 'ID'\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"ID\");",
+							"});",
+							"",
+							"pm.test(\"Encuentra un string con 'false'\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"false\");",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"ID\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/movies/dislike",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"movies",
+						"dislike"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "No encuentra películas con likes",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8346525f-5c27-4653-8f49-04a7b2e64da3",
+						"exec": [
+							"pm.test(\"Respuesta FALLIDA - 500\", function () {",
+							"    pm.response.to.have.status(500);",
+							"});",
+							"",
+							"pm.test(\"Encuentra un string con 'No se encontraron películas que te gusten.'\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"No se encontraron películas que te gusten.\");",
+							"});",
+							"",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/movies/getlikes",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"movies",
+						"getlikes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Dar like (Inválido)",
 			"event": [
 				{
 					"listen": "test",
@@ -247,13 +390,14 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:3000/movies",
+					"raw": "localhost:3000/movies/like",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
-						"movies"
+						"movies",
+						"like"
 					]
 				}
 			},

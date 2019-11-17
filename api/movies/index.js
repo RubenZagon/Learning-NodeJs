@@ -46,7 +46,7 @@ const dislike = (req, res) => {
   return respond(respondOfRequest, res);
 };
 
-const getlikes = (req, res) => {
+const getLikes = (req, res) => {
   const movies = controller.getMovies();
   const moviesWithLikes = movies.filter(movie => movie.like == true);
 
@@ -71,7 +71,7 @@ router.put('/like', like);
 
 router.put('/dislike', dislike);
 
-router.get('/getlikes', getlikes);
+router.get('/getlikes', getLikes);
 
 module.exports = router;
 
