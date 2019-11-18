@@ -1,16 +1,27 @@
-## Ejericio 2
+## Ejericio 3
 
 ### Encabezado
+
+**Parte 1**
 
 - Crear un CRUD de películas
 - Añadir endpoint para hacer like de una película
 - Añadir endpoint apra quitar el like de una película
 - Añadir endpoint para obtener todas las películas que le hemos hecho like
 
+**Parte 2 - Lectura de ficheros**
+
 Siguiendo el ejercicio anterior y para no perder los datos cada vez que actualizamos:
 
 - Guardaremos los datos en un fichero de texto
 - Al arrancar el servidor debemos cargarlos en la variable movies
+
+**Parte 3 - Middleware**
+
+Siguiendo el ejercicio anterior y para no perder los datos cada vez que actualizamos:
+
+- Lo primero que vamos a querer es saber si algo falla, para eso tendremos que auditarlo
+- Como no queremos que hagan un abuso de peticiones vamos a crear un rate-limit por usuario
 
 -----
 ### Scripts
