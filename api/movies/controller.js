@@ -2,24 +2,9 @@ const fs = require ('fs');
 const FILEPATH = 'data/movies.json';
 
 
-async function loadMovies (){
+const loadMovies = JSON.parse(fs.readFileSync(FILEPATH))
 
-  return await fs.readFile(FILEPATH, (err, data) => {
-    if (err){
-      console.log('Error', err);
-    } else {
-      return JSON.parse(data);
-    }
-  });
-};
-
-let peliculas = loadMovies()
-
-
-console.log(peliculas);
-
-//#####################################
-let movies;
+let movies = loadMovies;
 
 
 
