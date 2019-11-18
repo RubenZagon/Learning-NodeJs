@@ -1,11 +1,7 @@
-const fs = require ('fs');
-const FILEPATH = 'data/movies.json';
+const file = require ('./files')
 
 
-const loadMovies = JSON.parse(fs.readFileSync(FILEPATH))
-
-let movies = loadMovies;
-
+let movies = JSON.parse(file.loadMovies);
 
 
 const getMovies = () => {
@@ -14,7 +10,7 @@ const getMovies = () => {
 
 const newMovie = (req) => {
   let title = req;
-  console.log(movies);
+
   if (title != null) {
     let newMovie = {
       ID: movies[movies.length - 1].ID + 1,
@@ -22,6 +18,8 @@ const newMovie = (req) => {
       title: title
     };
     movies.push(newMovie);
+    
+    file.saveMovies(movies);
 
     return newMovie;
   } else {
@@ -38,6 +36,8 @@ const deleteMovie = (req) => {
 
   if (undefined != movieEncontred && movieEncontred.ID >= 0) {
     movies.splice(movieEncontred.ID, 1);
+    
+    file.saveMovies(movies);
     return movies;
 
   } else {
@@ -48,13 +48,18 @@ const deleteMovie = (req) => {
 const modifyLike = (req, addOrRemove = true) => {
   let id = req;
   let modify = addOrRemove;
+
   let film = movies.find(movie => movie.ID === id);
+
   if (film) {
     if (modify == true){
       film.like = true;
     } else {
       film.like = false;
     }
+
+    file.saveMovies(movies);
+
     return film;
 
   } else {
@@ -71,5 +76,7 @@ module.exports = {
   newMovie,
   deleteMovie
 };
+
+
 
 
