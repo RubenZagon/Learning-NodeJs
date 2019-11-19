@@ -13,14 +13,17 @@
   "author": "Rubén",
   "license": "ISC",
   "dependencies": {
+    "compression": "^1.7.4",
     "express": "^4.17.1",
-    "express-session": "^1.17.0",
     "morgan": "^1.9.1"
   },
   "devDependencies": {
     "@types/jest": "^24.0.23",
     "eslint": "^6.6.0",
+    "express-session": "^1.17.0",
     "jest": "^24.9.0",
+    "method-override": "^3.0.0",
+    "node-notifier": "^6.0.0",
     "nodemon": "^1.19.4"
   }
 }
