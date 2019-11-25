@@ -4,7 +4,6 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node server.js",
     "dev": "tsc && nodemon ./dist/server.js",
     "test": "jest",
     "testw": "jest --watch",

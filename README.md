@@ -35,8 +35,7 @@ Ya tenemos nuestra API de películas funcionando  vamos hacer lo siguiente:
 
 | Comando         | Descripción                                                    |
 | :-------------- | :------------------------------------------------------------- |
-| `npm run start` | Ejecuta el servidor, pero no se actualiza con cada cambio      |
-| `npm run dev`   | Activa el nodemon para levantar el servidor por el puerto 3000 |
+| `npm run dev`   | Compila los archivos en TypeScript y activa el nodemon para levantar el servidor por el puerto 3000 |
 | `npm run test`  | Pasa los test con Jest                                         |
 | `npm run testw` | Activa Jest en modo --watch                                    |
 
