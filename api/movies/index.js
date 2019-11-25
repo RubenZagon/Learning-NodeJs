@@ -3,8 +3,6 @@ const router = express.Router();
 const controller = require('./controller');
 const helper = require('./helper');
 
-
-
 const getMoviesRes = (req, res, next) => { 
   let movies = controller.getMovies()
   return res.status(200).json(movies)
@@ -66,10 +64,9 @@ const getLikes = (req, res) => {
   }
 };
 
-
 //API REST movies
 router.get('/', getMoviesRes);
-
+  
 router.post('/', newMovie);
 
 router.delete('/', deleteMovie);
@@ -79,6 +76,7 @@ router.put('/like', like);
 router.put('/dislike', dislike);
 
 router.get('/getlikes', getLikes);
+
 
 module.exports = router;
 
