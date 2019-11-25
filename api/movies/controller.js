@@ -1,12 +1,12 @@
 const file = require ('./files')
 
+let movies = JSON.parse(file.loadMovies)
 
-let movies = JSON.parse(file.loadMovies);
 
+const getMovies = () => { 
+  return movies
+}
 
-const getMovies = () => {
-  return movies;
-};
 
 const newMovie = (req) => {
   let title = req;

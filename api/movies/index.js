@@ -5,7 +5,16 @@ const helper = require('./helper');
 
 
 
-const getMovies = (req, res) => { res.status(200).json(controller.getMovies());  };
+const getMoviesRes = (req, res, next) => { 
+  let movies = controller.getMovies()
+  return res.status(200).json(movies)
+  
+  // if (movies = undefined){ 
+  //   next(`Error en la base de datos`) 
+  // }else{
+
+  // }
+};
 
 const newMovie = (req, res) => {
   if (req.body && req.body.title) {
@@ -59,7 +68,7 @@ const getLikes = (req, res) => {
 
 
 //API REST movies
-router.get('/', getMovies);
+router.get('/', getMoviesRes);
 
 router.post('/', newMovie);
 

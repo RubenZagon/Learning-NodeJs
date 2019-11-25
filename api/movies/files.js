@@ -1,6 +1,6 @@
 const fs = require ('fs');
-const FILEPATH = 'data/movies.json';
-
+const path = require('path')
+const FILEPATH = path.join(__dirname,'../../data/movies.json');
 
 const loadMovies = fs.readFileSync(FILEPATH)
 
@@ -13,7 +13,6 @@ function saveMovies(movies) {
     console.log('Error', error);
   }
 }
-
 
 module.exports = {
   loadMovies,
