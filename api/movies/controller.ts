@@ -1,18 +1,19 @@
+export{}
 const file = require ('./files')
 
-let movies = JSON.parse(file.loadMovies)
+const movies = JSON.parse(file.loadMovies)
 
 
-const getMovies = () => { 
+const getMovies = ():object => { 
   return movies
 }
 
 
-const newMovie = (req) => {
-  let title = req;
+function newMovie (req:object):object {
+  const title = req;
 
   if (title != null) {
-    let newMovie = {
+    const newMovie = {
       ID: movies[movies.length - 1].ID + 1,
       like: false,
       title: title
@@ -24,15 +25,15 @@ const newMovie = (req) => {
     return newMovie;
   } else {
 
-    return false;
+    return null;
   }
 };
 
 
 const deleteMovie = (req) => {
-  let id = req;
+  const id = req;
 
-  let movieEncontred = movies.find(movie => movie.ID === id);
+  const movieEncontred = movies.find(movie => movie.ID === id);
 
   if (undefined != movieEncontred && movieEncontred.ID >= 0) {
     movies.splice(movieEncontred.ID, 1);
@@ -46,10 +47,10 @@ const deleteMovie = (req) => {
 };
 
 const modifyLike = (req, addOrRemove = true) => {
-  let id = req;
-  let modify = addOrRemove;
+  const id = req;
+  const modify = addOrRemove;
 
-  let film = movies.find(movie => movie.ID === id);
+  const film = movies.find(movie => movie.ID === id);
 
   if (film) {
     if (modify == true){

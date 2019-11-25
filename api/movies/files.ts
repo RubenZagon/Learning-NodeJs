@@ -1,6 +1,7 @@
+export{}
 const fs = require ('fs');
 const path = require('path')
-const FILEPATH = path.join(__dirname,'../../data/movies.json');
+const FILEPATH = path.join(__dirname,'../../../data/movies.json');
 
 const loadMovies = fs.readFileSync(FILEPATH)
 

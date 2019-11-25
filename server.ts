@@ -1,3 +1,4 @@
+export{}
 const express = require('express');
 const morgan = require('morgan'); //Te da información de los HTTP
 const compression = require('compression');

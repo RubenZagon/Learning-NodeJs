@@ -1,3 +1,4 @@
+export{}
 const isValid = input => (veq, validators) => {
   try {
     return validators.every(validator => validator(input));

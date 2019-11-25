@@ -1,10 +1,11 @@
+export{}
 const express = require('express');
 const router = express.Router();
 const controller = require('./controller');
 const helper = require('./helper');
 
 const getMoviesRes = (req, res, next) => { 
-  let movies = controller.getMovies()
+  const movies = controller.getMovies()
   return res.status(200).json(movies)
   
   // if (movies = undefined){ 
