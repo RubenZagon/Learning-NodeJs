@@ -23,6 +23,13 @@ Siguiendo el ejercicio anterior y para no perder los datos cada vez que actualiz
 - Lo primero que vamos a querer es saber si algo falla, para eso tendremos que auditarlo
 - Como no queremos que hagan un abuso de peticiones vamos a crear un rate-limit por usuario
 
+**Parte 4 - TypeScript**
+
+Ya tenemos nuestra API de películas funcionando  vamos hacer lo siguiente:
+
+- Migración a TypeScript
+- Crear test de pruebas para tener nuestro código estable y preparado para nuevos cambios
+
 -----
 ### Scripts
 
