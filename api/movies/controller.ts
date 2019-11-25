@@ -1,7 +1,7 @@
 export{}
 const file = require ('./files')
 
-const movies = JSON.parse(file.loadMovies)
+const movies:any = JSON.parse(file.loadMovies)
 
 
 const getMovies = ():object => { 
@@ -9,7 +9,7 @@ const getMovies = ():object => {
 }
 
 
-function newMovie (req:object):object {
+function newMovie (req:any):object | boolean {
   const title = req;
 
   if (title != null) {
@@ -25,15 +25,15 @@ function newMovie (req:object):object {
     return newMovie;
   } else {
 
-    return null;
+    return false;
   }
 };
 
 
-const deleteMovie = (req) => {
+const deleteMovie = (req:object) => {
   const id = req;
 
-  const movieEncontred = movies.find(movie => movie.ID === id);
+  const movieEncontred:any = movies.find(movie => movie.ID === id);
 
   if (undefined != movieEncontred && movieEncontred.ID >= 0) {
     movies.splice(movieEncontred.ID, 1);
@@ -46,7 +46,7 @@ const deleteMovie = (req) => {
   }
 };
 
-const modifyLike = (req, addOrRemove = true) => {
+const modifyLike = (req:object, addOrRemove:boolean = true) => {
   const id = req;
   const modify = addOrRemove;
 

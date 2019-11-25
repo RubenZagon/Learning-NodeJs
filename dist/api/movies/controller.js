@@ -18,7 +18,7 @@ function newMovie(req) {
         return newMovie_1;
     }
     else {
-        return null;
+        return false;
     }
 }
 ;

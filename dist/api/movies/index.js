@@ -7,10 +7,6 @@ var helper = require('./helper');
 var getMoviesRes = function (req, res, next) {
     var movies = controller.getMovies();
     return res.status(200).json(movies);
-    // if (movies = undefined){ 
-    //   next(`Error en la base de datos`) 
-    // }else{
-    // }
 };
 var newMovie = function (req, res) {
     if (req.body && req.body.title) {

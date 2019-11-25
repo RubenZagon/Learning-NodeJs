@@ -4,18 +4,12 @@ const router = express.Router();
 const controller = require('./controller');
 const helper = require('./helper');
 
-const getMoviesRes = (req, res, next) => { 
+const getMoviesRes = (req, res:any, next):void => { 
   const movies = controller.getMovies()
   return res.status(200).json(movies)
-  
-  // if (movies = undefined){ 
-  //   next(`Error en la base de datos`) 
-  // }else{
-
-  // }
 };
 
-const newMovie = (req, res) => {
+const newMovie = (req:any, res:any):void => {
   if (req.body && req.body.title) {
     return res.status(201).json(controller.newMovie(req.body.title))
   } else {
@@ -23,7 +17,7 @@ const newMovie = (req, res) => {
   }
 };
 
-const deleteMovie = (req, res) => {
+const deleteMovie = (req:any, res:any):void => {
   const respondOfRequest = controller.deleteMovie(req.body.ID, res);
 
     if (respondOfRequest){
@@ -35,7 +29,7 @@ const deleteMovie = (req, res) => {
 };
 
 
-function respond(respondOfRequest, res) {
+function respond(respondOfRequest:boolean, res:any):void {
   if (respondOfRequest) {
     res.status(201).json(respondOfRequest);
   }
@@ -44,17 +38,17 @@ function respond(respondOfRequest, res) {
   }
 };
 
-const like = (req, res) => {
+const like = (req:any, res:any):void => {
   const respondOfRequest = controller.modifyLike(req.body.ID, true);
   return respond(respondOfRequest, res);
 };
 
-const dislike = (req, res) => {
+const dislike = (req:any, res:any):void => {
   const respondOfRequest = controller.modifyLike(req.body.ID, false);
   return respond(respondOfRequest, res);
 };
 
-const getLikes = (req, res) => {
+const getLikes = (req:any, res:any):void => {
   const movies = controller.getMovies();
   const moviesWithLikes = movies.filter(movie => movie.like == true);
 
