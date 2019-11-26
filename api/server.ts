@@ -5,8 +5,8 @@ require("./database")
 
 // APP START
 async function main() {
-  await app.listen(3000);
-  console.log("Ready on port 3000!");
+  await app.listen(app.get("port"));
+  console.log(`Ready on port ${app.get("port")}!`);
 }
 
 main();

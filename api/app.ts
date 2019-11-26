@@ -8,19 +8,17 @@ const methodOverride = require('method-override');
 const notifier = require('node-notifier');
 const rateLimit = require("express-rate-limit");
 
-// CONFIGURACIÓN
-
-// Intercambiar los modo de trabajo para el manejo de errores
-process.env.NODE_ENV = "development";
-// process.env.NODE_ENV = 'production';
-
 const app = express();
 
-const moviesRouter = require("./movies");
-const usersRouter = require("./users");
+// CONFIGURACIÓN
 
+app.set("port", process.env.PORT || 3000);
 
 // MIDLEWARES
+app.use(express.json());
+
+// Compresión de todas las peticiones
+app.use(compression());
 
 // Rate limit
 const limiter = rateLimit({
@@ -33,13 +31,8 @@ const limiter = rateLimit({
 //  apply to all requests
 app.use(limiter);
 
-// Compresión de todas las peticiones
-app.use(compression());
-
 // Session control
 app.use(session({ secret: "1234" }));
-
-app.use(express.json());
 
 // Te da información de las peticiones HTTP
 app.use(morgan("combined"));
@@ -58,6 +51,10 @@ if (process.env.NODE_ENV === "development") {
 }
 
 // Rutas
+
+const moviesRouter = require("./movies");
+const usersRouter = require("./users");
+
 app.get("/", (req, res) => {
   if (req.session.views) {
     req.session.views++;
@@ -68,7 +65,7 @@ app.get("/", (req, res) => {
   }
 });
 
-app.use("/movies", moviesRouter);
-app.use("/users", usersRouter);
+app.use("/api/movies", moviesRouter);
+app.use("/api/users", usersRouter);
 
 module.exports = app;

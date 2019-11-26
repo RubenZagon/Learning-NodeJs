@@ -1,3 +1,7 @@
+echo "Cerrando proceso de Mongo en el sistema"
+
+sudo service mongodb stop
+
 echo "Levantando docker"
 
 # Si el docker no está con el usuario docker, necesitarás utilizar sudo,
