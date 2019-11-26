@@ -9,46 +9,25 @@ const getMovies = async () => {
   return Movie.find();
 };
 
-// const client = await DBManager.getDB();
-// const db = client.db('movies');
-// const moviesCollection = db.collection('movies');
-// return await moviesCollection.find();
+function newMovie(movie: any): object | boolean {
 
-// const getMovies = (movieId: object): Promise<string> => {
-//   return new Promise((resolve, reject) => {
-//     MongoClient.connect(MONGO_URL, (err, client) => {
-//       if (!err) {
-//         const db = client.db('MOVIESDB');
-//         const moviesCollection = db.collection('movies');
-//         moviesCollection.findOne({ _id: ObjectId(movieId) })
-//           .then(movie => resolve(movie))
-//           .catch(errorFind => reject(errorFind));
-//       } else {
-//         reject(err);
-//       }
-//     });
-//   });
-// }
+  const movieToCreate = new Movie({ ...movie });
+  console.log("Creo que película guaradada");
+  return movieToCreate.save();
+  // if (title != null) {
+  //   const newMovie = new Movie({
+  //     title: title,
+  //     like: false,
+  //   });
+  //   movies.push(newMovie);
 
+  //   file.saveMovies(movies);
 
-function newMovie(req: any): object | boolean {
-  const title = req;
+  //   return newMovie;
+  // } else {
 
-  if (title != null) {
-    const newMovie = {
-      ID: movies[movies.length - 1].ID + 1,
-      like: false,
-      title: title
-    };
-    movies.push(newMovie);
-
-    file.saveMovies(movies);
-
-    return newMovie;
-  } else {
-
-    return false;
-  }
+  //   return false;
+  // }
 };
 
 

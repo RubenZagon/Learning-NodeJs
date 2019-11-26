@@ -13,8 +13,10 @@ const getMoviesRes = async (req, res: any, next) => {
 };
 
 const newMovie = (req: any, res: any): void => {
-  if (req.body && req.body.title) {
-    return res.status(201).json(controller.newMovie(req.body.title));
+  if (req.body && req.body.name) {
+    controller.newMovie(req.body)
+    res.status(201).json("Película guardada");
+    return
   } else {
     return res.status(400).json("Nombre inválido, no se ha podido añadir la película");
   }

@@ -8,10 +8,10 @@ export interface IMovieModel extends Document {
 }
 
 const MovieSchema: typeof Schema = new Schema({
-  name: { type: String, require: true, unique: true },
+  name: { type: String, require: true, unique: false },
   updated: { type: Date, default: Date.now() },
   created: { type: Date, default: Date.now() },
-  like: { type: Boolean }
+  like: { type: Boolean, default: false }
 });
 
 export const Movie = model("movies", MovieSchema);

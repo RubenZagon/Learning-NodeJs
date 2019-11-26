@@ -1,4 +1,15 @@
 "use strict";
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -44,40 +55,21 @@ var getMovies = function () { return __awaiter(void 0, void 0, void 0, function 
         return [2 /*return*/, model_1.Movie.find()];
     });
 }); };
-// const client = await DBManager.getDB();
-// const db = client.db('movies');
-// const moviesCollection = db.collection('movies');
-// return await moviesCollection.find();
-// const getMovies = (movieId: object): Promise<string> => {
-//   return new Promise((resolve, reject) => {
-//     MongoClient.connect(MONGO_URL, (err, client) => {
-//       if (!err) {
-//         const db = client.db('MOVIESDB');
-//         const moviesCollection = db.collection('movies');
-//         moviesCollection.findOne({ _id: ObjectId(movieId) })
-//           .then(movie => resolve(movie))
-//           .catch(errorFind => reject(errorFind));
-//       } else {
-//         reject(err);
-//       }
-//     });
-//   });
-// }
-function newMovie(req) {
-    var title = req;
-    if (title != null) {
-        var newMovie_1 = {
-            ID: movies[movies.length - 1].ID + 1,
-            like: false,
-            title: title
-        };
-        movies.push(newMovie_1);
-        file.saveMovies(movies);
-        return newMovie_1;
-    }
-    else {
-        return false;
-    }
+function newMovie(movie) {
+    var movieToCreate = new model_1.Movie(__assign({}, movie));
+    console.log("Creo que película guaradada");
+    return movieToCreate.save();
+    // if (title != null) {
+    //   const newMovie = new Movie({
+    //     title: title,
+    //     like: false,
+    //   });
+    //   movies.push(newMovie);
+    //   file.saveMovies(movies);
+    //   return newMovie;
+    // } else {
+    //   return false;
+    // }
 }
 ;
 var deleteMovie = function (req) {
