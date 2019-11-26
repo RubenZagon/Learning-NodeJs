@@ -1,15 +1,15 @@
-export{}
+export { }
 const express = require('express');
 const router = express.Router();
 const controller = require('./controller');
 const helper = require('./helper');
 
-const getMoviesRes = (req, res:any, next):void => { 
-  const movies = controller.getMovies()
-  return res.status(200).json(movies)
+const getMoviesRes = (req, res: any, next): void => {
+  // const movies = controller.getMovies()
+  // return res.status(200).json(movies)
 };
 
-const newMovie = (req:any, res:any):void => {
+const newMovie = (req: any, res: any): void => {
   if (req.body && req.body.title) {
     return res.status(201).json(controller.newMovie(req.body.title))
   } else {
@@ -17,19 +17,19 @@ const newMovie = (req:any, res:any):void => {
   }
 };
 
-const deleteMovie = (req:any, res:any):void => {
+const deleteMovie = (req: any, res: any): void => {
   const respondOfRequest = controller.deleteMovie(req.body.ID, res);
 
-    if (respondOfRequest){
-      res.status(201).json(respondOfRequest);
+  if (respondOfRequest) {
+    res.status(201).json(respondOfRequest);
 
-    } else {
-      res.status(406).send('Error al borrar la película, película no encontrada.');
-    };
+  } else {
+    res.status(406).send('Error al borrar la película, película no encontrada.');
+  };
 };
 
 
-function respond(respondOfRequest:boolean, res:any):void {
+function respond(respondOfRequest: boolean, res: any): void {
   if (respondOfRequest) {
     res.status(201).json(respondOfRequest);
   }
@@ -38,30 +38,30 @@ function respond(respondOfRequest:boolean, res:any):void {
   }
 };
 
-const like = (req:any, res:any):void => {
+const like = (req: any, res: any): void => {
   const respondOfRequest = controller.modifyLike(req.body.ID, true);
   return respond(respondOfRequest, res);
 };
 
-const dislike = (req:any, res:any):void => {
+const dislike = (req: any, res: any): void => {
   const respondOfRequest = controller.modifyLike(req.body.ID, false);
   return respond(respondOfRequest, res);
 };
 
-const getLikes = (req:any, res:any):void => {
+const getLikes = (req: any, res: any): void => {
   const movies = controller.getMovies();
   const moviesWithLikes = movies.filter(movie => movie.like == true);
 
-  if (moviesWithLikes.length !== 0){
+  if (moviesWithLikes.length !== 0) {
     res.status(200).json(moviesWithLikes);
   } else {
     res.status(500).json("No se encontraron películas que te gusten.");
   }
 };
 
-//API REST movies
+// routes
 router.get('/', getMoviesRes);
-  
+
 router.post('/', newMovie);
 
 router.delete('/', deleteMovie);

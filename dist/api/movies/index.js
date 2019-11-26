@@ -5,8 +5,8 @@ var router = express.Router();
 var controller = require('./controller');
 var helper = require('./helper');
 var getMoviesRes = function (req, res, next) {
-    var movies = controller.getMovies();
-    return res.status(200).json(movies);
+    // const movies = controller.getMovies()
+    // return res.status(200).json(movies)
 };
 var newMovie = function (req, res) {
     if (req.body && req.body.title) {
@@ -53,7 +53,7 @@ var getLikes = function (req, res) {
         res.status(500).json("No se encontraron películas que te gusten.");
     }
 };
-//API REST movies
+// routes
 router.get('/', getMoviesRes);
 router.post('/', newMovie);
 router.delete('/', deleteMovie);

@@ -35,13 +35,22 @@ Ya tenemos nuestra API de películas funcionando  vamos hacer lo siguiente:
 - Migración a la base de datos a Mongodb, utilizando docker
 
 -----
+# Pasos iniciales
+
+Para levantar el docker, debemos realizar el siguiente comando, estando en dentro de la carpeta del proyecto
+
+`sh script/run-docker-sh`
+
+Esto lo que hará será levantar un docker y alojar la base de datos en el directorio actual,pero dentro de ./data/db
+
+------
 ### Scripts
 
-| Comando         | Descripción                                                    |
-| :-------------- | :------------------------------------------------------------- |
+| Comando         | Descripción                                                                                         |
+| :-------------- | :-------------------------------------------------------------------------------------------------- |
 | `npm run dev`   | Compila los archivos en TypeScript y activa el nodemon para levantar el servidor por el puerto 3000 |
-| `npm run test`  | Pasa los test con Jest                                         |
-| `npm run testw` | Activa Jest en modo --watch                                    |
+| `npm run test`  | Pasa los test con Jest                                                                              |
+| `npm run testw` | Activa Jest en modo --watch                                                                         |
 
 ### Endpoints
 
