@@ -1,15 +1,18 @@
 export { }
 const file = require('./files')
 
+import { Movie } from "./model";
+
 const movies: any = JSON.parse(file.loadMovies)
 
 const getMovies = async () => {
-  // const client = await DBManager.getDB();
-  // const db = client.db('movies');
-  // const moviesCollection = db.collection('movies');
-  // return await moviesCollection.find();
+  return Movie.find();
 };
 
+// const client = await DBManager.getDB();
+// const db = client.db('movies');
+// const moviesCollection = db.collection('movies');
+// return await moviesCollection.find();
 
 // const getMovies = (movieId: object): Promise<string> => {
 //   return new Promise((resolve, reject) => {

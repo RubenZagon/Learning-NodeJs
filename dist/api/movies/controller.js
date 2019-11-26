@@ -37,12 +37,17 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var file = require('./files');
+var model_1 = require("./model");
 var movies = JSON.parse(file.loadMovies);
 var getMovies = function () { return __awaiter(void 0, void 0, void 0, function () {
     return __generator(this, function (_a) {
-        return [2 /*return*/];
+        return [2 /*return*/, model_1.Movie.find()];
     });
 }); };
+// const client = await DBManager.getDB();
+// const db = client.db('movies');
+// const moviesCollection = db.collection('movies');
+// return await moviesCollection.find();
 // const getMovies = (movieId: object): Promise<string> => {
 //   return new Promise((resolve, reject) => {
 //     MongoClient.connect(MONGO_URL, (err, client) => {

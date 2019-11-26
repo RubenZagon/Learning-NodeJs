@@ -1,19 +1,22 @@
-export { }
-const express = require('express');
+export { };
+const express = require("express");
 const router = express.Router();
-const controller = require('./controller');
-const helper = require('./helper');
+const controller = require("./controller");
+const helper = require("./helper");
 
-const getMoviesRes = (req, res: any, next): void => {
-  // const movies = controller.getMovies()
-  // return res.status(200).json(movies)
+
+
+const getMoviesRes = async (req, res: any, next) => {
+  const movies = controller.getMovies();
+  res.status(200).json(movies);
+  return;
 };
 
 const newMovie = (req: any, res: any): void => {
   if (req.body && req.body.title) {
-    return res.status(201).json(controller.newMovie(req.body.title))
+    return res.status(201).json(controller.newMovie(req.body.title));
   } else {
-    return res.status(400).json("Nombre inválido, no se ha podido añadir la película")
+    return res.status(400).json("Nombre inválido, no se ha podido añadir la película");
   }
 };
 
@@ -24,19 +27,17 @@ const deleteMovie = (req: any, res: any): void => {
     res.status(201).json(respondOfRequest);
 
   } else {
-    res.status(406).send('Error al borrar la película, película no encontrada.');
-  };
+    res.status(406).send("Error al borrar la película, película no encontrada.");
+  }
 };
-
 
 function respond(respondOfRequest: boolean, res: any): void {
   if (respondOfRequest) {
     res.status(201).json(respondOfRequest);
+  } else {
+    res.status(400).json("Película no encontrada");
   }
-  else {
-    res.status(400).json('Película no encontrada');
-  }
-};
+}
 
 const like = (req: any, res: any): void => {
   const respondOfRequest = controller.modifyLike(req.body.ID, true);
@@ -49,8 +50,8 @@ const dislike = (req: any, res: any): void => {
 };
 
 const getLikes = (req: any, res: any): void => {
-  const movies = controller.getMovies();
-  const moviesWithLikes = movies.filter(movie => movie.like == true);
+  const movies: any = controller.getMovies();
+  const moviesWithLikes = movies.filter((movie: { like: boolean; }) => movie.like === true);
 
   if (moviesWithLikes.length !== 0) {
     res.status(200).json(moviesWithLikes);
@@ -60,19 +61,16 @@ const getLikes = (req: any, res: any): void => {
 };
 
 // routes
-router.get('/', getMoviesRes);
+router.get("/", getMoviesRes);
 
-router.post('/', newMovie);
+router.post("/", newMovie);
 
-router.delete('/', deleteMovie);
+router.delete("/", deleteMovie);
 
-router.put('/like', like);
+router.put("/like", like);
 
-router.put('/dislike', dislike);
+router.put("/dislike", dislike);
 
-router.get('/getlikes', getLikes);
-
+router.get("/getlikes", getLikes);
 
 module.exports = router;
-
-
